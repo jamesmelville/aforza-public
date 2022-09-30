@@ -1,0 +1,2 @@
+function runAction(r){try{const{record:t,related:o}=r.data,[n]=o.Account,e=n.AvailableCredit__c,i=t.TotalAmount;if(e==null)throw new Error(" No credit limit available");if(i==null)throw new Error(" No order total available");if(e<0)throw new Error(" Credit Limit Exceeded");r.data.message=` Order total ${i} is within credit
+    limit of ${e}`}catch(t){r.data.error=t==null?void 0:t.message}return r}
