@@ -12,7 +12,7 @@ function runAction(payload) {
     }
     if (creditLimit < 0) {
     throw new Error(
-    ` Credit Limit Exceeded`
+    ` Credit Limit Exceeded - Current credit:${creditLimit}`
     );
     }
     payload.data.message = ` Order total ${orderTotal} is within credit
@@ -20,5 +20,10 @@ function runAction(payload) {
     } catch (error) {
     payload.data.error = error?.message;
     }
+    payload.data.updateDeviceData = true;
+    payload.data.updateDeviceData.Order = true;
+    payload.data.updateDeviceData.OrderIem = true;
+    payload.data.reprice = true;
+
     return payload;
     }
