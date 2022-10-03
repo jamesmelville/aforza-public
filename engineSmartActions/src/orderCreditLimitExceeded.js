@@ -1,29 +1,27 @@
 function runAction(payload) {
-    try {
+  try {
     const { record: order, related } = payload.data;
     const [account] = related.Account;
     const creditLimit = account.AvailableCredit__c;
     const orderTotal = order.TotalAmount;
     if (creditLimit === null || creditLimit === undefined) {
-    throw new Error(" No credit limit available");
+      throw new Error(" No credit limit available");
     }
     if (orderTotal === null || orderTotal === undefined) {
-    throw new Error(" No order total available");
+      throw new Error(" No order total available");
     }
     if (creditLimit <= 0) {
-    throw new Error(
-    ` Credit Limit Exceeded - Current credit:${creditLimit}`
-    );
+      throw new Error(` Credit Limit Exceeded - Current credit:${creditLimit}`);
     }
     payload.data.message = ` Order total ${orderTotal} is within credit
     limit of ${creditLimit}`;
-    } catch (error) {
+  } catch (error) {
     payload.data.error = error?.message;
-    }
-    payload.data.updateDeviceData = true;
-    payload.data.updateDeviceData.Order = true;
-    payload.data.updateDeviceData.OrderIem = true;
-    payload.data.reprice = true;
+  }
+  payload.data.updateDeviceData = true;
+  payload.data.updateDeviceData.Order = true;
+  payload.data.updateDeviceData.OrderIem = true;
+  payload.data.reprice = true;
 
-    return payload;
-    }
+  return payload;
+}
