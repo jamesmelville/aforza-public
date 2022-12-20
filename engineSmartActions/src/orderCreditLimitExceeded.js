@@ -10,7 +10,7 @@ function runAction(payload) {
     if (orderTotal === null || orderTotal === undefined) {
       throw new Error(" No order total available");
     }
-    if (creditLimit <= 0) {
+    if (creditLimit <= 0 || creditLimit < orderTotal) {
       throw new Error(` Credit Limit Exceeded - Current credit:${creditLimit}`);
     }
     payload.data.message = ` Order total ${orderTotal} is within credit
