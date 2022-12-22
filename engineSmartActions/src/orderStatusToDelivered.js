@@ -3,7 +3,7 @@ function runAction(payload) {
     const { record: order } = payload.data;
     const orderStatus = order.Status;
 
-    if(orderStatus == 'Activated'){
+    if(orderStatus == 'Pending Delivery'){
         orderStatus = 'Delivered';
     }
     
