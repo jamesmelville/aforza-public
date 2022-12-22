@@ -1,0 +1,1 @@
+function runAction(t){try{const{record:e}=t.data,r=e.Status;r=="Activated"&&(r="Delivered")}catch(e){t.data.error=e==null?void 0:e.message}return t.data.updateDeviceData=!0,t.data.updateDeviceData.Order=!0,t.data.updateDeviceData.OrderIem=!0,t.data.reprice=!0,t}
