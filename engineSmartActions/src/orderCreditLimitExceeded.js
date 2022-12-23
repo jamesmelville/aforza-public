@@ -7,10 +7,10 @@ function runAction(payload) {
     const orderRecordtype = order.OrderRecordTypeName__c;
     if(orderRecordtype === 'FieldDirectOrder'){
       if (creditLimit === null || creditLimit === undefined) {
-        throw new Error(" No credit limit available");
+        throw new Error("No credit limit available");
       }
       if (orderTotal === null || orderTotal === undefined) {
-        throw new Error(" No order total available");
+        throw new Error("No order total available");
       }
       if (creditLimit < orderTotal) {
         throw new Error(` Credit Limit Exceeded - Current credit: ${creditLimit} and Order Total is ${orderTotal}`);
