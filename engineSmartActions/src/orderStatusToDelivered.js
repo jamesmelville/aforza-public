@@ -4,7 +4,7 @@ function runAction(payload) {
     const orderStatus = order.Status;
 
     if(orderStatus === 'Pending Delivery'){
-        orderStatus = 'Delivered';
+       payload.data.Status = 'Delivered';
     }
     
   } catch (error) {
