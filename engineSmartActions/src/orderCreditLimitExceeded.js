@@ -5,7 +5,7 @@ function runAction(payload) {
     const creditLimit = account.AvailableCredit__c;
     const orderTotal = order.TotalAmount;
     const orderRecordtype = order.OrderRecordTypeName__c;
-    if(orderRecordtype == 'FieldDirectOrder'){
+    if(orderRecordtype === "FieldDirectOrder"){
       if (creditLimit === null || creditLimit === undefined) {
         throw new Error("No credit limit available");
       }
