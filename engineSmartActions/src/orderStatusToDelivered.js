@@ -1,10 +1,11 @@
 function runAction(payload) {
   try {
-    const { record: order } = payload.data;
+    const { record: order, related } = payload.data;
+    const [account] = related.Account;
     const orderStatus = order.Status;
 
     if(orderStatus === 'Pending Delivery'){
-       payload.data.Status = 'Delivered';
+      orderStatus = 'Delivered';
     }
     payload.data.message = 'Order Delivered';
   } catch (error) {
