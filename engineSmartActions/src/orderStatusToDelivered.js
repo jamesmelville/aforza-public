@@ -1,7 +1,6 @@
 function runAction(payload) {
   try {
-    const { record: order} = payload.data;
-    
+
     if(payload.data.Status === 'Pending Delivery'){
       payload.data.Status = 'Delivered';
       payload.data.message = 'Order Delivered';
