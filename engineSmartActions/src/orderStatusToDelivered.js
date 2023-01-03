@@ -1,8 +1,10 @@
 function runAction(payload) {
   try {
+    const { data } = payload;
+    const { record } = data;
 
-    if(payload.data.Status === 'Pending Delivery'){
-      payload.data.Status = 'Delivered';
+    if(record.Status === 'Pending Delivery'){
+      record.Status = 'Delivered';
       payload.data.message = 'Order Delivered';
     }
     
