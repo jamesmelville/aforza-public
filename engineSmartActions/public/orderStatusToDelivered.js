@@ -1,1 +1,1 @@
-function runAction(e){try{const{record:t}=e.data;t.Status==="Pending Delivery"&&(t.Status="Delivered"),e.data.message="Order Delivered"}catch(t){e.data.error=t==null?void 0:t.message}return e.data.updateDeviceData.Order=!0,e.data.updateDeviceData.OrderItem=!1,e.data.reprice=!1,e}
+function runAction(e){try{const{record:t}=e.data;e.data.Status==="Pending Delivery"&&(e.data.Status="Delivered",e.data.message="Order Delivered")}catch(t){e.data.error=t==null?void 0:t.message}return e.data.updateDeviceData.Order=!0,e.data.updateDeviceData.OrderItem=!1,e.data.reprice=!1,e}
