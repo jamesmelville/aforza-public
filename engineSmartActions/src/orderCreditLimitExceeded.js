@@ -20,7 +20,7 @@ function runAction(payload) {
     }
     
   } catch (error) {
-    payload.data.error = JSON.stringify(related);
+    payload.data.error = related;
   }
   payload.data.updateDeviceData = true;
   payload.data.updateDeviceData.Order = true;
