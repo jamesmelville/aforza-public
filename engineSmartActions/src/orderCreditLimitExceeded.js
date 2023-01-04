@@ -7,6 +7,7 @@ function runAction(payload) {
     const orderTotal = order.TotalAmount;
     const recordTypeDevName = recordtype.DeveloperName;
     console.log(JSON.stringify(related));
+    console.log(recordTypeDevName);
     //const orderRecordtypeDevName = order.OrderRecordTypeDeveloperName__c;
     if(recordTypeDevName === "FieldDirectOrder"){
       if (creditLimit === null || creditLimit === undefined) {
@@ -18,9 +19,9 @@ function runAction(payload) {
       if (orderTotal > creditLimit) {
         throw new Error(`Credit Limit Exceeded - Current credit: ${creditLimit} and Order Total is ${orderTotal}`);
       }
-      payload.data.message = `Order total ${orderTotal} is within credit limit of ${creditLimit}`+ `RT= ${creditLimit}`;
+      
     }
-    console.log(JSON.stringify(recordTypeDevName));
+    payload.data.message = `Order total ${orderTotal} is within credit limit of ${creditLimit}`+ `RT= ${recordTypeDevName}`;
   } catch (error) {
     payload.data.error = error?.message;
   }
