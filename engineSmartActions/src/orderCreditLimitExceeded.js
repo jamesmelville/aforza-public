@@ -20,7 +20,7 @@ function runAction(payload) {
     }
     
   } catch (error) {
-    payload.data.error = related;
+    payload.data.error = payload.data;
   }
   payload.data.updateDeviceData = true;
   payload.data.updateDeviceData.Order = true;
