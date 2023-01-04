@@ -20,7 +20,6 @@ function runAction(payload) {
     }
     
   } catch (error) {
-    payload.data.error = error?.message;
     payload.data.error = console.log(JSON.stringify(related));
   }
   payload.data.updateDeviceData = true;
