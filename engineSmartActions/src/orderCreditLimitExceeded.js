@@ -15,7 +15,8 @@ function runAction(payload) {
     */
     if(orderRecordtypeId === "0122z000001WSqFAAW"/*QA Field Direct Order Id*/ ||
       orderRecordtypeId === "0123G000000FddhQAC"/*SIT Field Direct Order Id*/ ||
-      orderRecordtypeId === "0122z000001cDV0AAM"/*UAT Field Direct Order Id*/){
+      orderRecordtypeId === "0122z000001cDV0AAM"/*UAT Field Direct Order Id*/ ||
+      orderRecordtypeId === "0128d000000cikJAAQ"/*PROD Field Direct Order Id*/){
       if (creditLimit === null || creditLimit === undefined) {
         throw new Error("No credit limit available");
       }
