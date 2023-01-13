@@ -102,7 +102,7 @@ function runAction(payload) {
 
     payload.data.updateDeviceData = true;
     payload.data.updateDeviceData.Order = true;
-    payload.data.updateDeviceData.OrderIem = true;
+    payload.data.updateDeviceData.OrderItem = true;
     payload.data.reprice = false;
     
     return payload;
