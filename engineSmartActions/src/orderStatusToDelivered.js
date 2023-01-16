@@ -1,19 +1,20 @@
 function runAction(payload) {
-  try {
-    const { record: order } = payload.data;
+    try {
+        const {record: order} = payload.data;
 
-    if(order.Status === 'Pending Delivery'){
-      order.Status = 'Delivered';
-      payload.data.message = 'Order Delivered';
+        if (order.Status === 'Pending Delivery') {
+            order.Status = 'Delivered';
+            payload.data.message = 'Order Delivered';
+        }
+
+    } catch (error) {
+        payload.data.error = error?.message;
     }
-    
-  } catch (error) {
-    payload.data.error = error?.message;
-  }
-  payload.data.updateDeviceData = true;
-  payload.data.updateDeviceData.Order = true;
-  payload.data.updateDeviceData.OrderItem = false;
-  payload.data.reprice = false;
+    payload.data.updateDeviceData = {
+        Order: true,
+        OrderItem: true
+    }
+    payload.data.reprice = false;
 
-  return payload;
+    return payload;
 }
