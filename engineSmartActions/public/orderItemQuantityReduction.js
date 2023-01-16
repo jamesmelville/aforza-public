@@ -1,2 +1,2 @@
 function runAction(r){r.data.message="The Order Item Quantities have been reduced";let e=r.data.record,u=new Map,a=new Map;if(r.data.related.PricebookEntry.forEach(t=>{u.set(t.Product2Id,t)}),r.data.related.OrderItem.forEach(t=>{a.set(t.Product2Id,t)}),e.OrderItemQuantityAdjusted__c!==!0)for(let t=1;t<11;t++){let d="MissingProduct"+t+"__c",i="MissingQuantity"+t+"__c";e[d]&&e[i]&&a.has(e[d])&&u.has(e[d])&&a.get(e[d]).Quantity-e[i]>=0&&(a.get(e[d]).Quantity-=e[i],e.OrderItemQuantityAdjusted__c=!0,r.data.message+=`
-`+u.get(e[d]).Name+": "+e[i])}return r.data.updateDeviceData={order:!0,orderItem:!0},r.data.reprice=!1,r}
+`+u.get(e[d]).Name+": "+e[i])}return r.data.updateDeviceData={Order:!0,OrderItem:!0},r.data.reprice=!1,r}
