@@ -1,5 +1,2 @@
-function runAction(e){e.data.message="The Order Item Quantities have been reduced";let t=e.data.record,i=new Map,d=new Map;if(e.data.related.PricebookEntry.forEach(a=>{i.set(a.Product2Id,a)}),e.data.related.OrderItem.forEach(a=>{d.set(a.Product2Id,a)}),t.OrderItemQuantityAdjusted__c!==!0)for(let a=1;a<11;a++){let r="MissingProduct"+a+"__c",u="MissingQuantity"+a+"__c";if(e.data.message+=`
-product lookup name `+r+" product quantity "+u,e.data.message+=`
-product lookup name value `+t[r]+" product quantity value "+t[u],t[r]&&t[u]&&d.has(t[r])&&i.has(t[r])&&d.get(t[r]).Quantity-t[u]>=0){let n=d.get(t[r]).Quantity-t[u];e.data.message+=`
-Actually in the logic aaaa new amount = `+n+"",d.get(t[r]).Quantity-=t[u],t.OrderItemQuantityAdjusted__c=!0,e.data.message+=`
-`+i.get(t[r]).Name+": "+t[u]}}return e.data.updateDeviceData=!0,e.data.updateDeviceData.Order=!0,e.data.updateDeviceData.OrderItem=!0,e.data.reprice=!1,e}
+function runAction(r){r.data.message="The Order Item Quantities have been reduced";let e=r.data.record,u=new Map,a=new Map;if(r.data.related.PricebookEntry.forEach(t=>{u.set(t.Product2Id,t)}),r.data.related.OrderItem.forEach(t=>{a.set(t.Product2Id,t)}),e.OrderItemQuantityAdjusted__c!==!0)for(let t=1;t<11;t++){let d="MissingProduct"+t+"__c",i="MissingQuantity"+t+"__c";e[d]&&e[i]&&a.has(e[d])&&u.has(e[d])&&a.get(e[d]).Quantity-e[i]>=0&&(a.get(e[d]).Quantity-=e[i],e.OrderItemQuantityAdjusted__c=!0,r.data.message+=`
+`+u.get(e[d]).Name+": "+e[i])}return r.data.updateDeviceData={order:!0,orderItem:!0},r.data.reprice=!1,r}
