@@ -10,7 +10,7 @@ function runAction(payload) {
     });
 
     payload.data.related.OrderItem.forEach(orderItem => {
-        if (orderItem.Product2.ProductCode === 'DRS-001') {
+        if (orderItem.Product2.ProductCode === '9999300') {
             orderItem.Quantity = total;
         }
     });
