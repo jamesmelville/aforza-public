@@ -37,7 +37,7 @@ function runAction(payload) {
                 }
             });
 
-            if (productMap.get(orderItem.Product2Id).Family === 'Deposit') {
+            if (productMap.get(orderItem.Product2Id).ProductCode === '9999300') {
                 orderItem.Quantity = tempTotal;
             }
         }
