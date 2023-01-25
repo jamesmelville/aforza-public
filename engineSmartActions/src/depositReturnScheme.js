@@ -1,32 +1,55 @@
 function runAction(payload) {
+
     payload.data.message = "";
-    let total = 0;
-    payload.data.related.OrderItem.forEach(orderItem => {
-        payload.data.related.aforza__Relationship_Rule__c.forEach(productRule => {
-            if (orderItem.Product2Id === productRule.aforza__Source_Product__c) {
-                total += orderItem.Quantity * productRule.aforza__Quantity__c
-            }
-        });
-    });
+    
+    let productIdToQuantity = new Map();
+    let targetProductIdToRelationshipRules = new Map();
+    let productMap = new Map();
 
     payload.data.related.OrderItem.forEach(orderItem => {
-        if (orderItem.Product2.ProductCode === '9999300') {
-            orderItem.Quantity = total;
+        productIdToQuantity.set(orderItem.Product2Id, orderItem.Quantity);
+    });
+
+    payload.data.related.aforza__Relationship_Rule__c.forEach(rule => {
+        if (rule.aforza__Type__c === 'Addition') {
+            if (targetProductIdToRelationshipRules.has(rule.aforza__Target_Product__c)) {
+                targetProductIdToRelationshipRules.get(rule.aforza__Target_Product__c).push(rule);
+            } else {
+                let tempRelationshipRules = new Array();
+                tempRelationshipRules.push(rule);
+                targetProductIdToRelationshipRules.set(rule.aforza__Target_Product__c, tempRelationshipRules);
+            }
         }
     });
 
-    payload.data.message += "Your order has been validated";
+    payload.data.related.Product2.forEach(product => {
+        productMap.set(product.Id, product);
+    });
 
-    if (payload.data.message === "") {
-        payload.data.error = "An Error has occurred";
-        payload.data.message = null;
-    }
+    payload.data.related.OrderItem.forEach(orderItem => {
+        let tempTotal = 0;
+        let sourceProductFound = false;
+        if(targetProductIdToRelationshipRules.has(orderItem.Product2Id)) {
+            targetProductIdToRelationshipRules.get(orderItem.Product2Id).forEach(rule => {
+                if (productIdToQuantity.has(rule.aforza__Source_Product__c)) {
+                    tempTotal += productIdToQuantity.get(rule.aforza__Source_Product__c) * rule.aforza__Quantity__c;
+                    sourceProductFound = true;
+                }
+            });
 
+            if (productMap.get(orderItem.Product2Id).Family === 'Deposit') {
+                orderItem.Quantity = tempTotal;
+            }
+        }
+    });
+
+    payload.data.message +=  "Your Deposit Return Scheme has been validated";
+  
     payload.data.updateDeviceData = {
         Order: true,
         OrderItem: true
     }
     payload.data.reprice = true;
-
+    
     return payload;
 }
