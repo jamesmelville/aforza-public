@@ -16,6 +16,7 @@ function runAction(payload) {
 		payload.data.message = `Order Validated`;
 	} catch (error) {
 		payload.data.error = error?.message;
+		payload.data.blockExecution = true;
 	}
 	payload.data.updateDeviceData = false;
 	payload.data.reprice = false;
