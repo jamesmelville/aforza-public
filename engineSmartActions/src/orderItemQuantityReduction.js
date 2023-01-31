@@ -93,7 +93,7 @@ function runAction(payload) {
             Order: true,
             OrderItem: true
         }
-        payload.data.reprice = true;
+        payload.data.reprice = false;
 
     }
     
