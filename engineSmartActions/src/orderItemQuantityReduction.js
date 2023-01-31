@@ -81,32 +81,6 @@ function runAction(payload) {
         }
     }
 
-    // recalc tax on new qty
-    let taxTotal = 0;
-    payload.data.related.OrderItem.forEach(orderItem => {
-        if(productIdToPricebookEntry.has(orderItem.Product2Id)) {
-            let pbe = productIdToPricebookEntry.get(orderItem.Product2Id);
-            // only do for promo
-            if(pbe.Name != 'Tax') {
-                if(orderItem.aforza__Promotion__c && pbe.aforza__Tax_Percent__c) {
-                    let tax = orderItem.Quantity * orderItem.UnitPrice * pbe.aforza__Tax_Percent__c;
-                    tax = Math.round((tax + Number.EPSILON)) / 100;
-                    orderItem.aforza__Tax__c = tax;
-                }
-                taxTotal += orderItem.aforza__Tax__c;
-            }
-        }
-    });
-
-    payload.data.related.OrderItem.forEach(orderItem => {
-        if(productIdToPricebookEntry.has(orderItem.Product2Id)) {
-            let pbe = productIdToPricebookEntry.get(orderItem.Product2Id);
-            if(pbe.Name == 'Tax') {
-                orderItem.UnitPrice = taxTotal;
-            }
-        }
-    });
-
     if(errors.length > 0) {
         payload.data.error = errors.join('\r\n');
         payload.data.updateDeviceData = false;
@@ -119,7 +93,7 @@ function runAction(payload) {
             Order: true,
             OrderItem: true
         }
-        payload.data.reprice = false;
+        payload.data.reprice = true;
 
     }
     
