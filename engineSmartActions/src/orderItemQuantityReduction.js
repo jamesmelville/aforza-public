@@ -24,7 +24,7 @@ function runAction(payload) {
                 errors.push('Product ' + orderItem.Product2Id + ' missing from Pricebook.');
             }
 
-            messages.push('Item ' + i + ' orig qty =' + orderItem.OriginalQuantity__c + '.');
+            messages.push('Item ' + orderItem.Id + ' orig qty =' + orderItem.OriginalQuantity__c + '.');
             //reset quantity in case this code has been run before
             //orderItem.Quantity = orderItem.OriginalQuantity__c;
 
