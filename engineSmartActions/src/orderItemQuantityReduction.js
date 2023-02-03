@@ -18,7 +18,7 @@ function runAction(payload) {
     });
 
     payload.data.related.OrderItem.forEach(orderItem => {
-        if(orderItem.aforza__Promotion__c) {
+        //if(orderItem.aforza__Promotion__c) {
             //should be unreachable but worth validating
             if(!productIdToPricebookEntry.has(orderItem.Product2Id)) {
                 errors.push('Product ' + orderItem.Product2Id + ' missing from Pricebook.');
@@ -41,7 +41,7 @@ function runAction(payload) {
             else {
                 productIdToOrderItems.set(orderItem.Product2Id, new Array(orderItem));
             }
-        }
+        //}
     });
 
 
