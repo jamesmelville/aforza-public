@@ -24,8 +24,9 @@ function runAction(payload) {
                 errors.push('Product ' + orderItem.Product2Id + ' missing from Pricebook.');
             }
 
+            messages.push('Item ' + i + ' orig qty =' + orderItem.OriginalQuantity__c + '.');
             //reset quantity in case this code has been run before
-            orderItem.Quantity = orderItem.OriginalQuantity__c;
+            //orderItem.Quantity = orderItem.OriginalQuantity__c;
 
             if(productIdToOrderItems.has(orderItem.Product2Id)) {
                 //each product might occur multiple times in an order. When missing some we'll reduce qty with most expensive first,
