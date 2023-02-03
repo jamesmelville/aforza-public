@@ -18,14 +18,13 @@ function runAction(payload) {
     });
 
     payload.data.related.OrderItem.forEach(orderItem => {
-        //if(orderItem.aforza__Promotion__c) {
+        if(orderItem.aforza__Promotion__c) {
             //should be unreachable but worth validating
             if(!productIdToPricebookEntry.has(orderItem.Product2Id)) {
                 errors.push('Product ' + orderItem.Product2Id + ' missing from Pricebook.');
             }
 
-            messages.push('Item ' + orderItem.Id + ' orig qty =' + orderItem.OriginalQuantity__c + '.');
-            //reset quantity in case this code has been run before
+            //reset quantity in case this code has been run before - commented as app is discarding OriginalQuantity__c value
             //orderItem.Quantity = orderItem.OriginalQuantity__c;
 
             if(productIdToOrderItems.has(orderItem.Product2Id)) {
@@ -41,7 +40,7 @@ function runAction(payload) {
             else {
                 productIdToOrderItems.set(orderItem.Product2Id, new Array(orderItem));
             }
-        //}
+        }
     });
 
 
