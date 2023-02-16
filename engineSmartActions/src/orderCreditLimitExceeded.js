@@ -32,7 +32,6 @@ function runAction(payload) {
         payload.data.error = error?.message;
     }
     payload.data.updateDeviceData = false;
-    payload.data.reprice = true;
-
+    payload.data.reprice = false;
     return payload;
 }
