@@ -1,0 +1,1 @@
+function runAction(e){let r=!1;return e.data.related.OrderItem.forEach(i=>{i.OriginalUnitPrice__c&&i.OriginalUnitPrice__c!=i.UnitPrice&&(i.UnitPrice=i.OriginalUnitPrice__c,r=!0)}),r?(e.data.message="Prices corrected",e.data.updateDeviceData={Order:!0,OrderItem:!0},e.data.reprice=!1):(e.data.message="Prices correct",e.data.updateDeviceData=!1,e.data.reprice=!1),e}
