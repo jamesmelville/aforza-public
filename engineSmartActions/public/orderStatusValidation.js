@@ -1,0 +1,1 @@
+function runAction(e){return["Delivered","Receipted"].includes(e.data.record.Status)?(e.data.error="You can't open an order once delivered.",e.data.blockExecution=!0):e.data.message="Order ready for delivery",e.data.updateDeviceData=!1,e.data.reprice=!1,e}
